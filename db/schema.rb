@@ -11,15 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130620163148) do
+ActiveRecord::Schema.define(:version => 20130620220421) do
+
+  create_table "friendships", :force => true do |t|
+    t.integer  "friender_id"
+    t.integer  "friendee_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "secret_taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "secret_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "secrets", :force => true do |t|
     t.string   "title",        :null => false
-    t.text     "body",         :null => false
     t.integer  "author_id",    :null => false
     t.integer  "recipient_id", :null => false
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

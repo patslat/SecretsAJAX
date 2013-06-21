@@ -1,0 +1,39 @@
+<h1>Index</h1>
+
+<ul>
+	<% @users.each do |user| %>
+
+	<li><%= user.username %> |
+
+		<span class="friend_buttons <%=
+						current_user.friends.include?(user) ? 'friended' : 'unfriended' %>">
+		 <%= button_to "Remove Friend",
+		 		 user_friendship_url(user),
+				 :method => :delete,
+				 :remote => true,
+				 :form => { :class => "unfriend"} %>
+
+			<%= button_to "Add Friend", 					 					  					user_friendship_url(user),
+			  	:remote => true,
+			  	:form => { :class => "friend" } %>
+		</span>
+	</li>
+
+	<% end %>
+</ul>
+
+<script>
+$(".add_friend_form").on("ajax:success", function(event, data){
+  $(event.target).text("Friending").attr("disabled", "disabled");
+})
+
+$(".friend_buttons").on("ajax:success", function(event, data) {
+	$(this).toggleClass("unfriended").toggleClass("friended")
+})
+
+$(".remove_friend_form").on("ajax:success", function(event, data) {
+	$()
+})
+</script>
+
+

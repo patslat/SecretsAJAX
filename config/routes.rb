@@ -1,7 +1,9 @@
 AjaxDemo::Application.routes.draw do
   root :to => "Users#new"
 
-  resources :secrets
   resource :session
-  resources :users
+  resources :users do
+    resources :secrets, :only => [:new, :create, :destroy]
+    resource :friendship, :only => [:create, :destroy]
+  end
 end
